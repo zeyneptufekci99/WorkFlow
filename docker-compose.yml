@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: workflow-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: workflowdb
+      POSTGRES_USER: workflowuser
+      POSTGRES_PASSWORD: workflowpassword
+    ports:
+      - "5433:5432"
+    volumes:
+      - workflow_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  workflow_postgres_data:
