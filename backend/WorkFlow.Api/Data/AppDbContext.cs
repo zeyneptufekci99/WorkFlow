@@ -38,12 +38,15 @@ public class AppDbContext : DbContext
             .HasForeignKey(pm => pm.UserId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<ProjectMember>()
-            .HasIndex(pm => new { pm.ProjectId, pm.UserId })
-            .IsUnique();
-
         modelBuilder.Entity<User>()
             .HasIndex(u => u.Email)
             .IsUnique();
+
+        modelBuilder.Entity<ProjectMember>()
+            .HasKey(pm => new
+            {
+                pm.ProjectId,
+                pm.UserId
+            });
     }
 }
