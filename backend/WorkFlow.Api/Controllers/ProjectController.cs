@@ -42,6 +42,16 @@ public class ProjectController : ControllerBase
 
         _context.Projects.Add(project);
 
+        var projectMember = new ProjectMember
+        {
+            ProjectId = project.Id,
+            UserId = userId,
+            Role = ProjectMemberRole.Owner
+        };
+
+        _context.ProjectMembers.Add(projectMember);
+
+
         await _context.SaveChangesAsync();
 
         var projectDto = new ProjectDto
